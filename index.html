@@ -23,34 +23,24 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
     a { color: var(--blue); text-decoration: none; }
-
-    /* Layout */
     .app { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
     .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap; }
     .header-left h1 { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; }
     .header-left .subtitle { font-size: 13px; color: var(--text2); margin-top: 3px; }
     .header-right { display: flex; gap: 8px; align-items: center; }
-
-    /* Sync indicator */
     .sync { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); margin-bottom: 1.5rem; }
     .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
     .sync-dot.syncing { background: var(--orange); animation: pulse 1s infinite; }
     .sync-dot.error { background: var(--red); }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-    /* Metrics */
     .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
     .metric { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
     .metric .label { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
     .metric .value { font-size: 26px; font-weight: 600; }
-
-    /* Tabs */
     .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
     .tab { font-size: 13px; padding: 8px 16px; background: none; border: none; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .15s; }
     .tab:hover { color: var(--text); }
     .tab.active { color: var(--text); border-bottom-color: var(--blue); font-weight: 500; }
-
-    /* Buttons */
     .btn { padding: 8px 16px; border-radius: 8px; border: none; font-size: 13px; cursor: pointer; transition: opacity .15s; }
     .btn:hover { opacity: .85; }
     .btn-primary { background: var(--blue); color: #fff; }
@@ -58,8 +48,6 @@
     .btn-ai { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; }
     .btn-sm { padding: 5px 10px; font-size: 12px; }
     .btn-danger { background: #3a1a1a; color: var(--red); border: 0.5px solid #5a2a2a; }
-
-    /* Project cards */
     .project-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 10px; transition: border-color .15s; }
     .project-card:hover { border-color: #4a4e6a; }
     .project-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; gap: 1rem; }
@@ -76,8 +64,6 @@
     .chevron { font-size: 18px; color: var(--text2); transition: transform .2s; user-select: none; }
     .chevron.open { transform: rotate(180deg); }
     .task-count { font-size: 12px; color: var(--text2); }
-
-    /* Tasks */
     .task-list { display: none; border-top: 0.5px solid var(--border); padding-top: 10px; }
     .task-list.open { display: block; }
     .task-item { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 0.5px solid var(--border); }
@@ -96,48 +82,32 @@
     .add-task-row input { flex: 1; background: var(--bg3); border: 0.5px solid var(--border); border-radius: 6px; padding: 6px 10px; color: var(--text); font-size: 13px; }
     .add-task-row input:focus { outline: none; border-color: var(--blue); }
     .priority-select { background: var(--bg3); border: 0.5px solid var(--border); border-radius: 6px; padding: 6px 8px; color: var(--text2); font-size: 12px; }
-
-    /* Forms */
     .form-panel { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; display: none; }
     .form-panel.open { display: block; }
     .form-title { font-size: 13px; font-weight: 500; color: var(--text2); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 12px; }
     .form-row { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-    .form-row input, .form-row select, .form-row textarea { background: var(--bg3); border: 0.5px solid var(--border); border-radius: 6px; padding: 7px 10px; color: var(--text); font-size: 13px; flex: 1; min-width: 140px; }
-    .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--blue); }
+    .form-row input, .form-row select { background: var(--bg3); border: 0.5px solid var(--border); border-radius: 6px; padding: 7px 10px; color: var(--text); font-size: 13px; flex: 1; min-width: 140px; }
+    .form-row input:focus, .form-row select:focus { outline: none; border-color: var(--blue); }
     .form-actions { display: flex; gap: 8px; }
-
-    /* Logbook */
     .logbook-input { width: 100%; background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 12px; color: var(--text); font-size: 13px; resize: vertical; min-height: 100px; font-family: var(--font); margin-bottom: 10px; }
     .logbook-input:focus { outline: none; border-color: var(--blue); }
     .log-entry { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 8px; }
     .log-date { font-size: 11px; color: var(--text2); margin-bottom: 6px; }
     .log-text { font-size: 13px; line-height: 1.6; }
     .log-actions { display: flex; gap: 6px; margin-top: 8px; }
-
-    /* Summary cards */
     .summary-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 10px; }
     .summary-card h3 { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
     .summary-card p { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
-
-    /* Empty state */
     .empty { text-align: center; padding: 3rem; color: var(--text2); font-size: 13px; }
-
-    /* Modal */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 100; }
     .modal-overlay.open { display: flex; }
     .modal { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem; width: 90%; max-width: 480px; }
     .modal h3 { font-size: 16px; margin-bottom: 1rem; }
     .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1rem; }
-
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-    @media (max-width: 600px) {
-      .app { padding: 1rem; }
-      .header { flex-direction: column; }
-    }
+    @media (max-width: 600px) { .app { padding: 1rem; } .header { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -151,26 +121,21 @@
       <button class="btn btn-ghost btn-sm" onclick="toggleForm('new-project-form')">+ Nuevo proyecto</button>
     </div>
   </div>
-
   <div class="sync">
     <div class="sync-dot syncing" id="sync-dot"></div>
     <span id="sync-label">Conectando...</span>
   </div>
-
   <div class="metrics">
     <div class="metric"><div class="label">Proyectos activos</div><div class="value" id="m-active">—</div></div>
     <div class="metric"><div class="label">Tareas totales</div><div class="value" id="m-tasks">—</div></div>
     <div class="metric"><div class="label">Completadas</div><div class="value" id="m-done">—</div></div>
     <div class="metric"><div class="label">Entradas logbook</div><div class="value" id="m-log">—</div></div>
   </div>
-
   <div class="tabs">
     <button class="tab active" onclick="showTab('projects')">Proyectos</button>
     <button class="tab" onclick="showTab('logbook')">Logbook</button>
     <button class="tab" onclick="showTab('summary')">Resumen IA</button>
   </div>
-
-  <!-- PROJECTS TAB -->
   <div id="tab-projects">
     <div class="form-panel" id="new-project-form">
       <div class="form-title">Nuevo proyecto</div>
@@ -191,8 +156,6 @@
     </div>
     <div id="projects-list"></div>
   </div>
-
-  <!-- LOGBOOK TAB -->
   <div id="tab-logbook" style="display:none">
     <div style="margin-bottom:1.5rem">
       <div style="font-size:13px;color:var(--text2);margin-bottom:8px">Entrada de hoy</div>
@@ -205,8 +168,6 @@
     <div style="font-size:13px;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">Historial</div>
     <div id="log-list"></div>
   </div>
-
-  <!-- SUMMARY TAB -->
   <div id="tab-summary" style="display:none">
     <div class="summary-card">
       <h3>✦ Informe de situación</h3>
@@ -215,22 +176,21 @@
     </div>
     <div class="summary-card">
       <h3>📋 Resumen anual</h3>
-      <p>Genera un resumen de todas las actividades del año basado en tu logbook completo, apto para memoria anual o informe.</p>
+      <p>Genera un resumen de todas las actividades del año basado en tu logbook completo.</p>
       <button class="btn btn-ai btn-sm" onclick="requestAnnual()">Generar resumen anual</button>
     </div>
     <div class="summary-card">
       <h3>📦 Exportar datos</h3>
-      <p>Descarga todos tus proyectos y el logbook en formato JSON para backup o migración.</p>
+      <p>Descarga todos tus proyectos y el logbook en formato JSON para backup.</p>
       <button class="btn btn-ghost btn-sm" onclick="exportData()">Exportar JSON</button>
     </div>
   </div>
 </div>
 
-<!-- DELETE CONFIRM MODAL -->
 <div class="modal-overlay" id="delete-modal">
   <div class="modal">
     <h3>¿Eliminar este proyecto?</h3>
-    <p style="font-size:13px;color:var(--text2);margin-top:6px">Esta acción no se puede deshacer. Se eliminarán el proyecto y todas sus tareas.</p>
+    <p style="font-size:13px;color:var(--text2);margin-top:6px">Esta acción no se puede deshacer.</p>
     <div class="modal-actions">
       <button class="btn btn-ghost btn-sm" onclick="closeModal()">Cancelar</button>
       <button class="btn btn-danger btn-sm" onclick="confirmDelete()">Eliminar</button>
@@ -238,19 +198,31 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="ai-modal">
+  <div class="modal" style="max-width:640px;max-height:85vh;display:flex;flex-direction:column;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+      <h3 id="ai-modal-title" style="font-size:15px;">✦ Análisis IA</h3>
+      <button onclick="closeAiModal()" style="background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;line-height:1;">×</button>
+    </div>
+    <div id="ai-modal-body" style="overflow-y:auto;flex:1;font-size:13px;line-height:1.8;color:var(--text);white-space:pre-wrap;"></div>
+    <div id="ai-new-projects" style="display:none;margin-top:1rem;padding-top:1rem;border-top:0.5px solid var(--border);">
+      <div style="font-size:12px;font-weight:500;color:var(--orange);margin-bottom:10px;">⚡ Nuevos elementos detectados por la IA</div>
+      <div id="ai-suggestions-list"></div>
+    </div>
+    <div class="modal-actions" style="margin-top:1rem;">
+      <button class="btn btn-ghost btn-sm" onclick="closeAiModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
 <script>
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://zwhbcdexsuasfudzymnb.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3aGJjZGV4c3Vhc2Z1ZHp5bW5iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MjU2ODAsImV4cCI6MjA5NzEwMTY4MH0._Rl-v5yfD9JR6jZYiQCy8ILpyafeSQeh39eJPu54SgE';
-const CLAUDE_API_KEY = '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';
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
-
 let state = { projects: [], log: [], expanded: {} };
 let deleteTarget = null;
-let saveTimer = null;
 
 const defaultProjects = [
   { name:'MTE', status:'urgent', desc:'Nueva instalación KFA13/21 y KFA4 — hidráulica + SF6', tasks:[
@@ -295,27 +267,18 @@ const defaultProjects = [
   ]}
 ];
 
-// ─── SUPABASE ────────────────────────────────────────────────────────────────
 function setSyncStatus(s, text) {
   const dot = document.getElementById('sync-dot');
   dot.className = 'sync-dot' + (s==='syncing'?' syncing':s==='error'?' error':'');
   document.getElementById('sync-label').textContent = text;
 }
 
-async function initDB() {
-  // Create tables if they don't exist (run once)
-  await db.rpc('init_dashboard').catch(() => {}); // graceful fail if rpc doesn't exist
-}
-
 async function loadProjects() {
   setSyncStatus('syncing', 'Cargando proyectos...');
   const { data, error } = await db.from('projects').select('*').order('created_at');
   if (error) { setSyncStatus('error', 'Error al cargar'); return; }
-  if (!data.length) {
-    await seedDefaultProjects();
-  } else {
-    state.projects = data.map(p => ({ ...p, desc: p.description || '', tasks: p.tasks || [] }));
-  }
+  if (!data.length) { await seedDefaultProjects(); } 
+  else { state.projects = data.map(p => ({ ...p, desc: p.description || '', tasks: p.tasks || [] })); }
   renderProjects();
   setSyncStatus('ok', 'Sincronizado · ' + now());
 }
@@ -330,8 +293,7 @@ async function seedDefaultProjects() {
 async function loadLog() {
   const { data, error } = await db.from('logbook').select('*').order('created_at', { ascending: false });
   if (!error) state.log = data || [];
-  renderLog();
-  updateMetrics();
+  renderLog(); updateMetrics();
 }
 
 async function saveProject(p) {
@@ -354,7 +316,7 @@ async function addProject() {
   setSyncStatus('syncing', 'Guardando...');
   const { data, error } = await db.from('projects').insert({ name, description: desc, status, tasks: [] }).select().single();
   if (!error && data) {
-    state.projects.push({ ...data, tasks: [] });
+    state.projects.push({ ...data, desc: data.description || '', tasks: [] });
     document.getElementById('np-name').value = '';
     document.getElementById('np-desc').value = '';
     toggleForm('new-project-form');
@@ -383,7 +345,6 @@ async function deleteLog(id) {
   renderLog(); updateMetrics();
 }
 
-// ─── RENDER ──────────────────────────────────────────────────────────────────
 function progress(p) {
   const done = (p.tasks||[]).filter(t => t.done).length;
   const total = (p.tasks||[]).length;
@@ -402,7 +363,7 @@ function renderProjects() {
   el.innerHTML = state.projects.map(p => {
     const { done, total, pct } = progress(p);
     const exp = state.expanded[p.id];
-    const tasks = (p.tasks || []).map((t, i) => `
+    const tasks = (p.tasks||[]).map((t,i) => `
       <div class="task-item ${t.done?'done':''}">
         <input type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${p.id}',${i})">
         <div class="priority-dot p-${t.priority}"></div>
@@ -424,7 +385,7 @@ function renderProjects() {
         </div>
         <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
         <div class="task-list ${exp?'open':''}">
-          ${tasks || '<div style="font-size:13px;color:var(--text2);padding:4px 0">Sin tareas todavía.</div>'}
+          ${tasks||'<div style="font-size:13px;color:var(--text2);padding:4px 0">Sin tareas todavía.</div>'}
           <div class="add-task-row">
             <input id="nt-${p.id}" placeholder="Nueva tarea..." onkeydown="if(event.key==='Enter')addTask('${p.id}')">
             <select class="priority-select" id="np-${p.id}">
@@ -459,24 +420,19 @@ function renderLog() {
 
 function updateMetrics() {
   document.getElementById('m-active').textContent = state.projects.filter(p => p.status !== 'planned').length;
-  const all = state.projects.flatMap(p => p.tasks || []);
+  const all = state.projects.flatMap(p => p.tasks||[]);
   document.getElementById('m-tasks').textContent = all.length;
   document.getElementById('m-done').textContent = all.filter(t => t.done).length;
   document.getElementById('m-log').textContent = state.log.length;
 }
 
-// ─── INTERACTIONS ─────────────────────────────────────────────────────────────
-function toggleProject(id) {
-  state.expanded[id] = !state.expanded[id];
-  renderProjects();
-}
+function toggleProject(id) { state.expanded[id] = !state.expanded[id]; renderProjects(); }
 
 async function toggleTask(pid, idx) {
   const p = state.projects.find(x => x.id === pid);
   if (!p) return;
   p.tasks[idx].done = !p.tasks[idx].done;
-  renderProjects();
-  await saveProject(p);
+  renderProjects(); await saveProject(p);
 }
 
 async function addTask(pid) {
@@ -486,51 +442,66 @@ async function addTask(pid) {
   const p = state.projects.find(x => x.id === pid);
   if (!p) return;
   p.tasks.push({ text: inp.value.trim(), done: false, priority: sel ? sel.value : 'mid' });
-  inp.value = '';
-  renderProjects();
-  state.expanded[pid] = true;
-  await saveProject(p);
+  inp.value = ''; renderProjects(); state.expanded[pid] = true; await saveProject(p);
 }
 
 async function removeTask(pid, idx) {
   const p = state.projects.find(x => x.id === pid);
   if (!p) return;
-  p.tasks.splice(idx, 1);
-  renderProjects();
-  await saveProject(p);
+  p.tasks.splice(idx, 1); renderProjects(); await saveProject(p);
 }
 
 async function changeStatus(pid) {
   const p = state.projects.find(x => x.id === pid);
   if (!p) return;
-  const statuses = ['urgent', 'active', 'pending', 'planned'];
-  const idx = statuses.indexOf(p.status);
-  p.status = statuses[(idx + 1) % statuses.length];
-  renderProjects();
-  await saveProject(p);
+  const statuses = ['urgent','active','pending','planned'];
+  p.status = statuses[(statuses.indexOf(p.status)+1) % statuses.length];
+  renderProjects(); await saveProject(p);
 }
 
-function promptDelete(id) {
-  deleteTarget = id;
-  document.getElementById('delete-modal').classList.add('open');
+function promptDelete(id) { deleteTarget = id; document.getElementById('delete-modal').classList.add('open'); }
+async function confirmDelete() { if (deleteTarget) { await deleteProject(deleteTarget); deleteTarget = null; } closeModal(); }
+function closeModal() { document.getElementById('delete-modal').classList.remove('open'); deleteTarget = null; }
+
+function showAiModal(title, text, suggestions) {
+  document.getElementById('ai-modal-title').textContent = title;
+  document.getElementById('ai-modal-body').textContent = text;
+  const sugBox = document.getElementById('ai-new-projects');
+  const sugList = document.getElementById('ai-suggestions-list');
+  if (suggestions && suggestions.length) {
+    sugList.innerHTML = suggestions.map((s,i) => `
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border-radius:8px;padding:8px 12px;margin-bottom:6px;">
+        <div>
+          <div style="font-size:13px;font-weight:500;">${s.name}</div>
+          <div style="font-size:12px;color:var(--text2);">${s.desc||''}</div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="acceptSuggestion(${i})">+ Añadir</button>
+      </div>`).join('');
+    sugBox.style.display = 'block';
+    sugBox._suggestions = suggestions;
+  } else { sugBox.style.display = 'none'; }
+  document.getElementById('ai-modal').classList.add('open');
 }
 
-async function confirmDelete() {
-  if (deleteTarget) { await deleteProject(deleteTarget); deleteTarget = null; }
-  closeModal();
+function closeAiModal() { document.getElementById('ai-modal').classList.remove('open'); }
+
+async function acceptSuggestion(idx) {
+  const s = document.getElementById('ai-new-projects')._suggestions[idx];
+  if (!s) return;
+  const { data, error } = await db.from('projects').insert({ name: s.name, description: s.desc||'', status: s.status||'active', tasks: s.tasks||[] }).select().single();
+  if (!error && data) {
+    state.projects.push({ ...data, desc: data.description||'', tasks: data.tasks||[] });
+    renderProjects();
+    const btn = document.getElementById('ai-suggestions-list').children[idx].querySelector('button');
+    btn.textContent = '✓ Añadido'; btn.disabled = true; btn.style.background = 'var(--green)';
+  }
 }
 
-function closeModal() {
-  document.getElementById('delete-modal').classList.remove('open');
-  deleteTarget = null;
-}
-
-// ─── AI ───────────────────────────────────────────────────────────────────────
 async function callClaude(prompt) {
   const res = await fetch('/api/claude', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': CLAUDE_API_KEY, 'anthropic-version': '2023-06-01' },
-    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
   });
   const data = await res.json();
   return data.content?.[0]?.text || 'Sin respuesta.';
@@ -548,56 +519,68 @@ async function analyzeDay() {
   const text = document.getElementById('log-input').value.trim();
   if (!text) { alert('Escribe tu resumen del día primero.'); return; }
   const btn = event.target; btn.textContent = '⏳ Analizando...'; btn.disabled = true;
-  const prompt = `Soy técnico mecánico en el CERN, responsable de sistemas hidráulicos y SF6 de kicker magnets.\n\nResumen del día: "${text}"\n\nEstado del dashboard:\n${projectSummary()}\n\nPor favor:\n1. Analiza qué tareas se han completado o avanzado\n2. Identifica bloqueos o riesgos\n3. Propón las 3 prioridades para mañana\n4. Dame cualquier consejo técnico relevante`;
+  const existingNames = state.projects.map(p => p.name).join(', ');
+  const prompt = `Soy técnico mecánico en el CERN, responsable de sistemas hidráulicos y SF6 de kicker magnets.
+
+Resumen del día: "${text}"
+
+Proyectos existentes: ${existingNames}
+
+Estado del dashboard:
+${projectSummary()}
+
+Por favor responde en este formato exacto:
+
+ANÁLISIS:
+[Tu análisis aquí: qué tareas se han completado o avanzado, bloqueos o riesgos identificados, las 3 prioridades para mañana, y cualquier consejo técnico relevante]
+
+NUEVOS_PROYECTOS_JSON:
+[Si detectas menciones de nuevos proyectos o tareas que NO existen ya en el dashboard, devuelve un array JSON con objetos {name, desc, status, tasks:[{text,done:false,priority}]}. Si no hay nada nuevo, devuelve []]`;
+
   const reply = await callClaude(prompt);
   btn.textContent = '✦ Analizar con IA'; btn.disabled = false;
-  alert(reply); // Simple for now — could be a modal
+  const analysisPart = reply.split('NUEVOS_PROYECTOS_JSON:')[0].replace('ANÁLISIS:', '').trim();
+  let suggestions = [];
+  try {
+    const jsonPart = reply.split('NUEVOS_PROYECTOS_JSON:')[1]?.trim();
+    if (jsonPart) suggestions = JSON.parse(jsonPart);
+  } catch(e) { suggestions = []; }
+  showAiModal('✦ Análisis del día', analysisPart, suggestions);
 }
 
 async function requestSummary() {
   const btn = event.target; btn.textContent = '⏳ Generando...'; btn.disabled = true;
   const logs = state.log.slice(0,10).map(l=>`${l.date}: ${l.text}`).join('\n');
-  const prompt = `Soy técnico mecánico en el CERN, responsable de sistemas hidráulicos y SF6 de los kicker magnets del acelerador.\n\nProyectos actuales:\n${projectSummary()}\n\nÚltimas entradas del logbook:\n${logs||'Sin entradas.'}\n\nGenera un informe de situación con: estado general, proyectos críticos, próximas acciones recomendadas y posibles riesgos.`;
+  const prompt = `Soy técnico mecánico en el CERN, responsable de sistemas hidráulicos y SF6 de los kicker magnets.\n\nProyectos actuales:\n${projectSummary()}\n\nÚltimas entradas del logbook:\n${logs||'Sin entradas.'}\n\nGenera un informe de situación con: estado general, proyectos críticos, próximas acciones recomendadas y posibles riesgos.`;
   const reply = await callClaude(prompt);
   btn.textContent = 'Generar informe'; btn.disabled = false;
-  alert(reply);
+  showAiModal('✦ Informe de situación', reply, []);
 }
 
 async function requestAnnual() {
   const btn = event.target; btn.textContent = '⏳ Generando...'; btn.disabled = true;
   const logs = state.log.map(l=>`${l.date}: ${l.text}`).join('\n');
-  const prompt = `Genera un resumen anual de actividades para un técnico mecánico del CERN (sistemas hidráulicos y SF6 de kicker magnets).\n\nLogbook completo:\n${logs||'Sin entradas todavía.'}\n\nFormato: resumen ejecutivo, proyectos completados, hitos relevantes, lecciones aprendidas, trabajo pendiente para el próximo año.`;
+  const prompt = `Genera un resumen anual de actividades para un técnico mecánico del CERN (sistemas hidráulicos y SF6 de kicker magnets).\n\nLogbook:\n${logs||'Sin entradas todavía.'}\n\nFormato: resumen ejecutivo, proyectos completados, hitos relevantes, lecciones aprendidas, trabajo pendiente.`;
   const reply = await callClaude(prompt);
   btn.textContent = 'Generar resumen anual'; btn.disabled = false;
-  alert(reply);
+  showAiModal('📋 Resumen anual', reply, []);
 }
 
 function exportData() {
   const blob = new Blob([JSON.stringify({ projects: state.projects, log: state.log }, null, 2)], { type: 'application/json' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = `cern-dashboard-${new Date().toISOString().slice(0,10)}.json`;
+  a.download = `dashboard-${new Date().toISOString().slice(0,10)}.json`;
   a.click();
 }
 
-// ─── UI HELPERS ───────────────────────────────────────────────────────────────
 function showTab(tab) {
-  ['projects','logbook','summary'].forEach(t => {
-    document.getElementById('tab-'+t).style.display = t===tab ? 'block' : 'none';
-  });
-  document.querySelectorAll('.tab').forEach((el,i) => {
-    el.classList.toggle('active', ['projects','logbook','summary'][i]===tab);
-  });
+  ['projects','logbook','summary'].forEach(t => { document.getElementById('tab-'+t).style.display = t===tab?'block':'none'; });
+  document.querySelectorAll('.tab').forEach((el,i) => { el.classList.toggle('active', ['projects','logbook','summary'][i]===tab); });
 }
 
-function toggleForm(id) {
-  document.getElementById(id).classList.toggle('open');
-}
+function toggleForm(id) { document.getElementById(id).classList.toggle('open'); }
+function now() { return new Date().toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit' }); }
 
-function now() {
-  return new Date().toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit' });
-}
-
-// ─── BOOT ─────────────────────────────────────────────────────────────────────
 document.getElementById('today-date').textContent = new Date().toLocaleDateString('es-ES', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
 loadProjects().then(() => loadLog());
 </script>
