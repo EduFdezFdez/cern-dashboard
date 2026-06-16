@@ -6,20 +6,7 @@
   <title>CERN · Hydraulics & SF6 Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    :root {
-      --bg: #0f1117;
-      --bg2: #1a1d27;
-      --bg3: #22263a;
-      --border: #2e3248;
-      --text: #e8eaf0;
-      --text2: #8b90a8;
-      --blue: #4a9eff;
-      --red: #e24b4a;
-      --orange: #ef9f27;
-      --green: #4caf50;
-      --radius: 10px;
-      --font: 'Inter', system-ui, sans-serif;
-    }
+    :root { --bg: #0f1117; --bg2: #1a1d27; --bg3: #22263a; --border: #2e3248; --text: #e8eaf0; --text2: #8b90a8; --blue: #4a9eff; --red: #e24b4a; --orange: #ef9f27; --green: #4caf50; --radius: 10px; --font: 'Inter', system-ui, sans-serif; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
     a { color: var(--blue); text-decoration: none; }
@@ -72,9 +59,7 @@
     .task-text { font-size: 13px; color: var(--text2); flex: 1; }
     .task-item.done .task-text { text-decoration: line-through; opacity: .4; }
     .priority-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
-    .p-high { background: var(--red); }
-    .p-mid { background: var(--orange); }
-    .p-low { background: var(--blue); }
+    .p-high { background: var(--red); } .p-mid { background: var(--orange); } .p-low { background: var(--blue); }
     .delete-task { background: none; border: none; color: var(--text2); cursor: pointer; padding: 0 4px; font-size: 16px; opacity: 0; transition: opacity .15s; }
     .task-item:hover .delete-task { opacity: .5; }
     .delete-task:hover { opacity: 1 !important; color: var(--red); }
@@ -104,9 +89,7 @@
     .modal { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem; width: 90%; max-width: 480px; }
     .modal h3 { font-size: 16px; margin-bottom: 1rem; }
     .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1rem; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     @media (max-width: 600px) { .app { padding: 1rem; } .header { flex-direction: column; } }
   </style>
 </head>
@@ -121,10 +104,7 @@
       <button class="btn btn-ghost btn-sm" onclick="toggleForm('new-project-form')">+ Nuevo proyecto</button>
     </div>
   </div>
-  <div class="sync">
-    <div class="sync-dot syncing" id="sync-dot"></div>
-    <span id="sync-label">Conectando...</span>
-  </div>
+  <div class="sync"><div class="sync-dot syncing" id="sync-dot"></div><span id="sync-label">Conectando...</span></div>
   <div class="metrics">
     <div class="metric"><div class="label">Proyectos activos</div><div class="value" id="m-active">—</div></div>
     <div class="metric"><div class="label">Tareas totales</div><div class="value" id="m-tasks">—</div></div>
@@ -169,21 +149,9 @@
     <div id="log-list"></div>
   </div>
   <div id="tab-summary" style="display:none">
-    <div class="summary-card">
-      <h3>✦ Informe de situación</h3>
-      <p>Analiza el estado actual de todos tus proyectos y genera recomendaciones de prioridad para los próximos días.</p>
-      <button class="btn btn-ai btn-sm" onclick="requestSummary()">Generar informe</button>
-    </div>
-    <div class="summary-card">
-      <h3>📋 Resumen anual</h3>
-      <p>Genera un resumen de todas las actividades del año basado en tu logbook completo.</p>
-      <button class="btn btn-ai btn-sm" onclick="requestAnnual()">Generar resumen anual</button>
-    </div>
-    <div class="summary-card">
-      <h3>📦 Exportar datos</h3>
-      <p>Descarga todos tus proyectos y el logbook en formato JSON para backup.</p>
-      <button class="btn btn-ghost btn-sm" onclick="exportData()">Exportar JSON</button>
-    </div>
+    <div class="summary-card"><h3>✦ Informe de situación</h3><p>Analiza el estado actual de todos tus proyectos y genera recomendaciones de prioridad.</p><button class="btn btn-ai btn-sm" onclick="requestSummary()">Generar informe</button></div>
+    <div class="summary-card"><h3>📋 Resumen anual</h3><p>Genera un resumen de actividades del año basado en tu logbook completo.</p><button class="btn btn-ai btn-sm" onclick="requestAnnual()">Generar resumen anual</button></div>
+    <div class="summary-card"><h3>📦 Exportar datos</h3><p>Descarga todos tus proyectos y logbook en formato JSON.</p><button class="btn btn-ghost btn-sm" onclick="exportData()">Exportar JSON</button></div>
   </div>
 </div>
 
@@ -225,46 +193,11 @@ let state = { projects: [], log: [], expanded: {} };
 let deleteTarget = null;
 
 const defaultProjects = [
-  { name:'MTE', status:'urgent', desc:'Nueva instalación KFA13/21 y KFA4 — hidráulica + SF6', tasks:[
-    {text:'Preparar diagrama hidráulico KFA13/21',done:false,priority:'high'},
-    {text:'Preparar diagrama hidráulico KFA4',done:false,priority:'high'},
-    {text:'BOM tubos hidráulicos y filtros KFA4',done:false,priority:'high'},
-    {text:'Pedir recambios hidráulicos MTE',done:false,priority:'mid'},
-    {text:'Pedir material SF6 MTE',done:false,priority:'mid'}
-  ]},
-  { name:'KFA71', status:'urgent', desc:'Testing DS gen 7-9, SF6, filtros, HPU, fluorinert', tasks:[
-    {text:'Testear DS generador 7',done:false,priority:'high'},
-    {text:'Testear DS generador 8',done:false,priority:'high'},
-    {text:'Testear DS generador 9',done:false,priority:'high'},
-    {text:'Homogeneización SF6 KFA71',done:false,priority:'mid'},
-    {text:'Instalar filtros DS en 9 generadores existentes',done:false,priority:'mid'},
-    {text:'Modificación líneas acero inoxidable',done:false,priority:'mid'},
-    {text:'Encontrar y preparar HPU a instalar',done:false,priority:'mid'},
-    {text:'Preparar tanque drenaje KFA79',done:false,priority:'low'},
-    {text:'Optimizar tanque drenaje KFA71 instalado',done:false,priority:'low'},
-    {text:'Documentación llenado/vaciado',done:false,priority:'mid'},
-    {text:'Etiquetar válvulas',done:false,priority:'low'},
-    {text:'Añadir grupos hidráulicos en EAM (parts & assets)',done:false,priority:'low'},
-    {text:'Preparar elementos fluorinert cajas de conexión',done:false,priority:'mid'}
-  ]},
-  { name:'KFA14L1', status:'active', desc:'Separación líneas SF6, cajas conexión túnel, ECR', tasks:[
-    {text:'Preparar separación líneas SF6 en PFL',done:false,priority:'mid'},
-    {text:'Separación líneas SF6 en cables de transmisión',done:false,priority:'mid'},
-    {text:'Mejorar instalación cajas conexión en túnel',done:false,priority:'mid'},
-    {text:'Terminar de preparar ECR',done:false,priority:'high'}
-  ]},
-  { name:'KFA10/20', status:'active', desc:'Adaptación SF6 similar KFA14L1, nueva instalación aceite y gas SF6', tasks:[
-    {text:'Separación líneas SF6 (similar KFA14L1)',done:false,priority:'mid'},
-    {text:'Adaptar nueva instalación aceite',done:false,priority:'mid'},
-    {text:'Adaptar nueva instalación gas SF6',done:false,priority:'mid'},
-    {text:'Mantener al día inventario equipamiento SF6',done:false,priority:'mid'},
-    {text:'Seguimiento compras y emails importantes',done:false,priority:'low'}
-  ]},
-  { name:'SF6 Tracker', status:'planned', desc:'App/Excel seguimiento consumo SF6 en todas las instalaciones', tasks:[
-    {text:'Definir estructura de datos y variables a registrar',done:false,priority:'mid'},
-    {text:'Diseñar prototipo Excel/App',done:false,priority:'mid'},
-    {text:'Validar con datos reales',done:false,priority:'low'}
-  ]}
+  { name:'MTE', status:'urgent', desc:'Nueva instalación KFA13/21 y KFA4 — hidráulica + SF6', tasks:[{text:'Preparar diagrama hidráulico KFA13/21',done:false,priority:'high'},{text:'Preparar diagrama hidráulico KFA4',done:false,priority:'high'},{text:'BOM tubos hidráulicos y filtros KFA4',done:false,priority:'high'},{text:'Pedir recambios hidráulicos MTE',done:false,priority:'mid'},{text:'Pedir material SF6 MTE',done:false,priority:'mid'}]},
+  { name:'KFA71', status:'urgent', desc:'Testing DS gen 7-9, SF6, filtros, HPU, fluorinert', tasks:[{text:'Testear DS generador 7',done:false,priority:'high'},{text:'Testear DS generador 8',done:false,priority:'high'},{text:'Testear DS generador 9',done:false,priority:'high'},{text:'Homogeneización SF6 KFA71',done:false,priority:'mid'},{text:'Instalar filtros DS en 9 generadores existentes',done:false,priority:'mid'},{text:'Modificación líneas acero inoxidable',done:false,priority:'mid'},{text:'Encontrar y preparar HPU a instalar',done:false,priority:'mid'},{text:'Preparar tanque drenaje KFA79',done:false,priority:'low'},{text:'Optimizar tanque drenaje KFA71 instalado',done:false,priority:'low'},{text:'Documentación llenado/vaciado',done:false,priority:'mid'},{text:'Etiquetar válvulas',done:false,priority:'low'},{text:'Añadir grupos hidráulicos en EAM (parts & assets)',done:false,priority:'low'},{text:'Preparar elementos fluorinert cajas de conexión',done:false,priority:'mid'}]},
+  { name:'KFA14L1', status:'active', desc:'Separación líneas SF6, cajas conexión túnel, ECR', tasks:[{text:'Preparar separación líneas SF6 en PFL',done:false,priority:'mid'},{text:'Separación líneas SF6 en cables de transmisión',done:false,priority:'mid'},{text:'Mejorar instalación cajas conexión en túnel',done:false,priority:'mid'},{text:'Terminar de preparar ECR',done:false,priority:'high'}]},
+  { name:'KFA10/20', status:'active', desc:'Adaptación SF6 similar KFA14L1, nueva instalación aceite y gas SF6', tasks:[{text:'Separación líneas SF6 (similar KFA14L1)',done:false,priority:'mid'},{text:'Adaptar nueva instalación aceite',done:false,priority:'mid'},{text:'Adaptar nueva instalación gas SF6',done:false,priority:'mid'},{text:'Mantener al día inventario equipamiento SF6',done:false,priority:'mid'},{text:'Seguimiento compras y emails importantes',done:false,priority:'low'}]},
+  { name:'SF6 Tracker', status:'planned', desc:'App/Excel seguimiento consumo SF6 en todas las instalaciones', tasks:[{text:'Definir estructura de datos y variables a registrar',done:false,priority:'mid'},{text:'Diseñar prototipo Excel/App',done:false,priority:'mid'},{text:'Validar con datos reales',done:false,priority:'low'}]}
 ];
 
 function setSyncStatus(s, text) {
@@ -277,16 +210,14 @@ async function loadProjects() {
   setSyncStatus('syncing', 'Cargando proyectos...');
   const { data, error } = await db.from('projects').select('*').order('created_at');
   if (error) { setSyncStatus('error', 'Error al cargar'); return; }
-  if (!data.length) { await seedDefaultProjects(); } 
+  if (!data.length) { await seedDefaultProjects(); }
   else { state.projects = data.map(p => ({ ...p, desc: p.description || '', tasks: p.tasks || [] })); }
   renderProjects();
   setSyncStatus('ok', 'Sincronizado · ' + now());
 }
 
 async function seedDefaultProjects() {
-  for (const p of defaultProjects) {
-    await db.from('projects').insert({ name: p.name, status: p.status, description: p.desc, tasks: p.tasks });
-  }
+  for (const p of defaultProjects) { await db.from('projects').insert({ name: p.name, status: p.status, description: p.desc, tasks: p.tasks }); }
   await loadProjects();
 }
 
@@ -331,12 +262,7 @@ async function saveLog() {
   setSyncStatus('syncing', 'Guardando...');
   const date = new Date().toLocaleDateString('es-ES', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
   const { data, error } = await db.from('logbook').insert({ date, text }).select().single();
-  if (!error && data) {
-    state.log.unshift(data);
-    document.getElementById('log-input').value = '';
-    renderLog(); updateMetrics();
-    setSyncStatus('ok', 'Guardado · ' + now());
-  }
+  if (!error && data) { state.log.unshift(data); document.getElementById('log-input').value = ''; renderLog(); updateMetrics(); setSyncStatus('ok', 'Guardado · ' + now()); }
 }
 
 async function deleteLog(id) {
@@ -345,123 +271,42 @@ async function deleteLog(id) {
   renderLog(); updateMetrics();
 }
 
-function progress(p) {
-  const done = (p.tasks||[]).filter(t => t.done).length;
-  const total = (p.tasks||[]).length;
-  return { done, total, pct: total ? Math.round(done/total*100) : 0 };
-}
-
-function statusBadge(s) {
-  const map = { urgent:['Urgente','badge-urgent'], active:['Activo','badge-active'], pending:['En espera','badge-pending'], planned:['Planificado','badge-planned'] };
-  const [label, cls] = map[s] || ['Activo','badge-active'];
-  return `<span class="badge ${cls}">${label}</span>`;
-}
+function progress(p) { const done=(p.tasks||[]).filter(t=>t.done).length; const total=(p.tasks||[]).length; return {done,total,pct:total?Math.round(done/total*100):0}; }
+function statusBadge(s) { const map={urgent:['Urgente','badge-urgent'],active:['Activo','badge-active'],pending:['En espera','badge-pending'],planned:['Planificado','badge-planned']}; const [label,cls]=map[s]||['Activo','badge-active']; return `<span class="badge ${cls}">${label}</span>`; }
 
 function renderProjects() {
   const el = document.getElementById('projects-list');
   if (!state.projects.length) { el.innerHTML = '<div class="empty">No hay proyectos todavía.</div>'; updateMetrics(); return; }
   el.innerHTML = state.projects.map(p => {
-    const { done, total, pct } = progress(p);
-    const exp = state.expanded[p.id];
-    const tasks = (p.tasks||[]).map((t,i) => `
-      <div class="task-item ${t.done?'done':''}">
-        <input type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${p.id}',${i})">
-        <div class="priority-dot p-${t.priority}"></div>
-        <span class="task-text">${t.text}</span>
-        <button class="delete-task" onclick="removeTask('${p.id}',${i})" title="Eliminar">×</button>
-      </div>`).join('');
-    return `
-      <div class="project-card">
-        <div class="project-header" onclick="toggleProject('${p.id}')">
-          <div>
-            <div class="project-title">${p.name}</div>
-            <div class="project-desc">${p.desc}</div>
-          </div>
-          <div class="project-meta">
-            ${statusBadge(p.status)}
-            <span class="task-count">${done}/${total}</span>
-            <span class="chevron ${exp?'open':''}">⌄</span>
-          </div>
-        </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-        <div class="task-list ${exp?'open':''}">
-          ${tasks||'<div style="font-size:13px;color:var(--text2);padding:4px 0">Sin tareas todavía.</div>'}
-          <div class="add-task-row">
-            <input id="nt-${p.id}" placeholder="Nueva tarea..." onkeydown="if(event.key==='Enter')addTask('${p.id}')">
-            <select class="priority-select" id="np-${p.id}">
-              <option value="high">🔴 Alta</option>
-              <option value="mid" selected>🟡 Media</option>
-              <option value="low">🔵 Baja</option>
-            </select>
-            <button class="btn btn-ghost btn-sm" onclick="addTask('${p.id}')">+ Añadir</button>
-          </div>
-          <div style="margin-top:10px;padding-top:8px;border-top:0.5px solid var(--border);display:flex;gap:6px;">
-            <button class="btn btn-ghost btn-sm" onclick="changeStatus('${p.id}')">Cambiar estado</button>
-            <button class="btn btn-danger btn-sm" onclick="promptDelete('${p.id}')">Eliminar proyecto</button>
-          </div>
-        </div>
-      </div>`;
+    const {done,total,pct} = progress(p); const exp = state.expanded[p.id];
+    const tasks = (p.tasks||[]).map((t,i) => `<div class="task-item ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${p.id}',${i})"><div class="priority-dot p-${t.priority}"></div><span class="task-text">${t.text}</span><button class="delete-task" onclick="removeTask('${p.id}',${i})" title="Eliminar">×</button></div>`).join('');
+    return `<div class="project-card"><div class="project-header" onclick="toggleProject('${p.id}')"><div><div class="project-title">${p.name}</div><div class="project-desc">${p.desc}</div></div><div class="project-meta">${statusBadge(p.status)}<span class="task-count">${done}/${total}</span><span class="chevron ${exp?'open':''}">⌄</span></div></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div><div class="task-list ${exp?'open':''}">${tasks||'<div style="font-size:13px;color:var(--text2);padding:4px 0">Sin tareas todavía.</div>'}<div class="add-task-row"><input id="nt-${p.id}" placeholder="Nueva tarea..." onkeydown="if(event.key==='Enter')addTask('${p.id}')"><select class="priority-select" id="np-${p.id}"><option value="high">🔴 Alta</option><option value="mid" selected>🟡 Media</option><option value="low">🔵 Baja</option></select><button class="btn btn-ghost btn-sm" onclick="addTask('${p.id}')">+ Añadir</button></div><div style="margin-top:10px;padding-top:8px;border-top:0.5px solid var(--border);display:flex;gap:6px;"><button class="btn btn-ghost btn-sm" onclick="changeStatus('${p.id}')">Cambiar estado</button><button class="btn btn-danger btn-sm" onclick="promptDelete('${p.id}')">Eliminar proyecto</button></div></div></div>`;
   }).join('');
   updateMetrics();
 }
 
 function renderLog() {
   const el = document.getElementById('log-list');
-  if (!state.log.length) { el.innerHTML = '<div class="empty">Todavía no hay entradas en el logbook.</div>'; return; }
-  el.innerHTML = state.log.map(e => `
-    <div class="log-entry">
-      <div class="log-date">${e.date}</div>
-      <div class="log-text">${e.text}</div>
-      <div class="log-actions">
-        <button class="btn btn-danger btn-sm" onclick="deleteLog('${e.id}')">Eliminar</button>
-      </div>
-    </div>`).join('');
+  if (!state.log.length) { el.innerHTML = '<div class="empty">Todavía no hay entradas.</div>'; return; }
+  el.innerHTML = state.log.map(e => `<div class="log-entry"><div class="log-date">${e.date}</div><div class="log-text">${e.text}</div><div class="log-actions"><button class="btn btn-danger btn-sm" onclick="deleteLog('${e.id}')">Eliminar</button></div></div>`).join('');
 }
 
 function updateMetrics() {
-  document.getElementById('m-active').textContent = state.projects.filter(p => p.status !== 'planned').length;
-  const all = state.projects.flatMap(p => p.tasks||[]);
+  document.getElementById('m-active').textContent = state.projects.filter(p=>p.status!=='planned').length;
+  const all = state.projects.flatMap(p=>p.tasks||[]);
   document.getElementById('m-tasks').textContent = all.length;
-  document.getElementById('m-done').textContent = all.filter(t => t.done).length;
+  document.getElementById('m-done').textContent = all.filter(t=>t.done).length;
   document.getElementById('m-log').textContent = state.log.length;
 }
 
-function toggleProject(id) { state.expanded[id] = !state.expanded[id]; renderProjects(); }
-
-async function toggleTask(pid, idx) {
-  const p = state.projects.find(x => x.id === pid);
-  if (!p) return;
-  p.tasks[idx].done = !p.tasks[idx].done;
-  renderProjects(); await saveProject(p);
-}
-
-async function addTask(pid) {
-  const inp = document.getElementById('nt-' + pid);
-  const sel = document.getElementById('np-' + pid);
-  if (!inp || !inp.value.trim()) return;
-  const p = state.projects.find(x => x.id === pid);
-  if (!p) return;
-  p.tasks.push({ text: inp.value.trim(), done: false, priority: sel ? sel.value : 'mid' });
-  inp.value = ''; renderProjects(); state.expanded[pid] = true; await saveProject(p);
-}
-
-async function removeTask(pid, idx) {
-  const p = state.projects.find(x => x.id === pid);
-  if (!p) return;
-  p.tasks.splice(idx, 1); renderProjects(); await saveProject(p);
-}
-
-async function changeStatus(pid) {
-  const p = state.projects.find(x => x.id === pid);
-  if (!p) return;
-  const statuses = ['urgent','active','pending','planned'];
-  p.status = statuses[(statuses.indexOf(p.status)+1) % statuses.length];
-  renderProjects(); await saveProject(p);
-}
-
-function promptDelete(id) { deleteTarget = id; document.getElementById('delete-modal').classList.add('open'); }
-async function confirmDelete() { if (deleteTarget) { await deleteProject(deleteTarget); deleteTarget = null; } closeModal(); }
-function closeModal() { document.getElementById('delete-modal').classList.remove('open'); deleteTarget = null; }
+function toggleProject(id) { state.expanded[id]=!state.expanded[id]; renderProjects(); }
+async function toggleTask(pid,idx) { const p=state.projects.find(x=>x.id===pid); if(!p)return; p.tasks[idx].done=!p.tasks[idx].done; renderProjects(); await saveProject(p); }
+async function addTask(pid) { const inp=document.getElementById('nt-'+pid); const sel=document.getElementById('np-'+pid); if(!inp||!inp.value.trim())return; const p=state.projects.find(x=>x.id===pid); if(!p)return; p.tasks.push({text:inp.value.trim(),done:false,priority:sel?sel.value:'mid'}); inp.value=''; renderProjects(); state.expanded[pid]=true; await saveProject(p); }
+async function removeTask(pid,idx) { const p=state.projects.find(x=>x.id===pid); if(!p)return; p.tasks.splice(idx,1); renderProjects(); await saveProject(p); }
+async function changeStatus(pid) { const p=state.projects.find(x=>x.id===pid); if(!p)return; const s=['urgent','active','pending','planned']; p.status=s[(s.indexOf(p.status)+1)%s.length]; renderProjects(); await saveProject(p); }
+function promptDelete(id) { deleteTarget=id; document.getElementById('delete-modal').classList.add('open'); }
+async function confirmDelete() { if(deleteTarget){await deleteProject(deleteTarget);deleteTarget=null;} closeModal(); }
+function closeModal() { document.getElementById('delete-modal').classList.remove('open'); deleteTarget=null; }
 
 function showAiModal(title, text, suggestions) {
   document.getElementById('ai-modal-title').textContent = title;
@@ -469,14 +314,7 @@ function showAiModal(title, text, suggestions) {
   const sugBox = document.getElementById('ai-new-projects');
   const sugList = document.getElementById('ai-suggestions-list');
   if (suggestions && suggestions.length) {
-    sugList.innerHTML = suggestions.map((s,i) => `
-      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border-radius:8px;padding:8px 12px;margin-bottom:6px;">
-        <div>
-          <div style="font-size:13px;font-weight:500;">${s.name}</div>
-          <div style="font-size:12px;color:var(--text2);">${s.desc||''}</div>
-        </div>
-        <button class="btn btn-primary btn-sm" onclick="acceptSuggestion(${i})">+ Añadir</button>
-      </div>`).join('');
+    sugList.innerHTML = suggestions.map((s,i) => `<div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border-radius:8px;padding:8px 12px;margin-bottom:6px;"><div><div style="font-size:13px;font-weight:500;">${s.name}</div><div style="font-size:12px;color:var(--text2);">${s.desc||''}</div></div><button class="btn btn-primary btn-sm" onclick="acceptSuggestion(${i})">+ Añadir</button></div>`).join('');
     sugBox.style.display = 'block';
     sugBox._suggestions = suggestions;
   } else { sugBox.style.display = 'none'; }
@@ -498,28 +336,20 @@ async function acceptSuggestion(idx) {
 }
 
 async function callClaude(prompt) {
-  const res = await fetch('/api/claude', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
-  });
+  const res = await fetch('/api/claude', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1500,messages:[{role:'user',content:prompt}]}) });
   const data = await res.json();
   return data.content?.[0]?.text || 'Sin respuesta.';
 }
 
 function projectSummary() {
-  return state.projects.map(p => {
-    const { done, total, pct } = progress(p);
-    const pending = (p.tasks||[]).filter(t=>!t.done).map(t=>t.text).join(', ');
-    return `${p.name} [${p.status}] ${pct}% — Pendiente: ${pending||'ninguna'}`;
-  }).join('\n');
+  return state.projects.map(p => { const {done,total,pct}=progress(p); const pending=(p.tasks||[]).filter(t=>!t.done).map(t=>t.text).join(', '); return `${p.name} [${p.status}] ${pct}% — Pendiente: ${pending||'ninguna'}`; }).join('\n');
 }
 
 async function analyzeDay() {
   const text = document.getElementById('log-input').value.trim();
   if (!text) { alert('Escribe tu resumen del día primero.'); return; }
   const btn = event.target; btn.textContent = '⏳ Analizando...'; btn.disabled = true;
-  const existingNames = state.projects.map(p => p.name).join(', ');
+  const existingNames = state.projects.map(p=>p.name).join(', ');
   const prompt = `Soy técnico mecánico en el CERN, responsable de sistemas hidráulicos y SF6 de kicker magnets.
 
 Resumen del día: "${text}"
@@ -529,22 +359,40 @@ Proyectos existentes: ${existingNames}
 Estado del dashboard:
 ${projectSummary()}
 
-Por favor responde en este formato exacto:
+Por favor responde EXACTAMENTE en este formato, sin excepciones:
 
 ANÁLISIS:
 [Tu análisis aquí: qué tareas se han completado o avanzado, bloqueos o riesgos identificados, las 3 prioridades para mañana, y cualquier consejo técnico relevante]
 
 NUEVOS_PROYECTOS_JSON:
-[Si detectas menciones de nuevos proyectos o tareas que NO existen ya en el dashboard, devuelve un array JSON con objetos {name, desc, status, tasks:[{text,done:false,priority}]}. Si no hay nada nuevo, devuelve []]`;
+[{"name":"NombreProyecto","desc":"Descripción","status":"active","tasks":[{"text":"Primera tarea","done":false,"priority":"mid"}]}]
+
+IMPORTANTE sobre NUEVOS_PROYECTOS_JSON:
+- Si detectas nuevos proyectos o tareas que NO existen en el dashboard, inclúyelos en el array JSON
+- Si no hay nada nuevo, pon exactamente: []
+- El JSON debe ser válido, sin texto adicional dentro del bloque
+- NO omitas este bloque aunque esté vacío`;
 
   const reply = await callClaude(prompt);
   btn.textContent = '✦ Analizar con IA'; btn.disabled = false;
+
   const analysisPart = reply.split('NUEVOS_PROYECTOS_JSON:')[0].replace('ANÁLISIS:', '').trim();
   let suggestions = [];
   try {
-    const jsonPart = reply.split('NUEVOS_PROYECTOS_JSON:')[1]?.trim();
-    if (jsonPart) suggestions = JSON.parse(jsonPart);
+    const jsonPart = reply.split('NUEVOS_PROYECTOS_JSON:')[1]?.trim() || '';
+    const match = jsonPart.match(/\[[\s\S]*?\]/);
+    if (match) {
+      const cleaned = match[0].replace(/```json/g,'').replace(/```/g,'').trim();
+      const parsed = JSON.parse(cleaned);
+      if (Array.isArray(parsed) && parsed.length > 0) suggestions = parsed;
+    }
   } catch(e) { suggestions = []; }
+
+  if (!suggestions.length) {
+    const projectMatches = analysisPart.match(/nuevo proyecto[^."]*"([^"]+)"/gi) || [];
+    projectMatches.forEach(m => { const n=m.match(/"([^"]+)"/); if(n) suggestions.push({name:n[1],desc:'Detectado por IA',status:'active',tasks:[]}); });
+  }
+
   showAiModal('✦ Análisis del día', analysisPart, suggestions);
 }
 
@@ -567,22 +415,21 @@ async function requestAnnual() {
 }
 
 function exportData() {
-  const blob = new Blob([JSON.stringify({ projects: state.projects, log: state.log }, null, 2)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify({projects:state.projects,log:state.log},null,2)],{type:'application/json'});
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = `dashboard-${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
+  a.download = `dashboard-${new Date().toISOString().slice(0,10)}.json`; a.click();
 }
 
 function showTab(tab) {
-  ['projects','logbook','summary'].forEach(t => { document.getElementById('tab-'+t).style.display = t===tab?'block':'none'; });
-  document.querySelectorAll('.tab').forEach((el,i) => { el.classList.toggle('active', ['projects','logbook','summary'][i]===tab); });
+  ['projects','logbook','summary'].forEach(t=>{ document.getElementById('tab-'+t).style.display=t===tab?'block':'none'; });
+  document.querySelectorAll('.tab').forEach((el,i)=>{ el.classList.toggle('active',['projects','logbook','summary'][i]===tab); });
 }
 
 function toggleForm(id) { document.getElementById(id).classList.toggle('open'); }
-function now() { return new Date().toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit' }); }
+function now() { return new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); }
 
-document.getElementById('today-date').textContent = new Date().toLocaleDateString('es-ES', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-loadProjects().then(() => loadLog());
+document.getElementById('today-date').textContent = new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+loadProjects().then(()=>loadLog());
 </script>
 </body>
 </html>
